@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+// import { prisma } from '@/lib/prisma';
 
 export async function POST(request: Request) {
     try {
@@ -13,23 +13,26 @@ export async function POST(request: Request) {
             );
         }
 
-        try {
-            const lead = await prisma.lead.create({
-                data: {
-                    name,
-                    phoneNumber,
-                },
-            });
-            return NextResponse.json(lead, { status: 201 });
-        } catch (error: any) {
-            if (error.code === 'P2002') {
-                return NextResponse.json(
-                    { error: 'Phone number already exists' },
-                    { status: 409 }
-                );
-            }
-            throw error;
-        }
+        // try {
+        //     const lead = await prisma.lead.create({
+        //         data: {
+        //             name,
+        //             phoneNumber,
+        //         },
+        //     });
+        //     return NextResponse.json(lead, { status: 201 });
+        // } catch (error: any) {
+        //     if (error.code === 'P2002') {
+        //         return NextResponse.json(
+        //             { error: 'Phone number already exists' },
+        //             { status: 409 }
+        //         );
+        //     }
+        //     throw error;
+        // }
+
+        // Mock success response for now
+        return NextResponse.json({ id: 'temp-id', name, phoneNumber }, { status: 201 });
     } catch (error) {
         console.error('Error creating lead:', error);
         return NextResponse.json(
